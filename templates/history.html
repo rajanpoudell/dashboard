@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; max-width: 650px; margin: 40px auto; padding: 0 20px; color: #222; }
+        nav a { margin-right: 16px; font-size: 14px; }
+        .row { border-bottom: 1px solid #eee; padding: 12px 0; }
+        .category { color: #888; font-size: 13px; }
+        @media (max-width: 480px) {
+            body { margin: 20px auto; padding: 0 14px; }
+            nav { display: flex; flex-wrap: wrap; gap: 10px 16px; }
+            nav a { margin-right: 0; }
+            h1 { font-size: 26px; overflow-wrap: anywhere; }
+            .category { display: block; margin-top: 4px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Today</a>
+        <a href="/history">History</a>
+        <a href="/send-now">Send Now</a>
+    </nav>
+    <h1>Covered so far ({{ entries|length }})</h1>
+    {% for e in entries %}
+    <div class="row">
+        <b>{{ e.name }}</b> <span class="category">— {{ e.category }} — {{ e.date }}</span>
+        {% if e.video_url %}<br><a href="{{ e.video_url }}">{{ e.video_title }}</a>{% endif %}
+    </div>
+    {% else %}
+    <p>Nothing sent yet.</p>
+    {% endfor %}
+</body>
+</html>
